@@ -1,0 +1,24 @@
+{% extends "forms/field.html.twig" %}
+
+{% block label %}{% if field.label %}{{ parent() }}{% endif %}{% endblock %}
+
+{% block input %}
+    {% set opts = (altcha.widget ?? {})|merge(field.widget ?? {}) %}
+
+    {% set widget_config = opts.configuration ?? {} %}
+    {% if opts.hide_logo %}{% set widget_config = widget_config|merge({hideLogo: true}) %}{% endif %}
+    {% if opts.hide_footer %}{% set widget_config = widget_config|merge({hideFooter: true}) %}{% endif %}
+
+    {% set script_url = altcha.script_url ?: url('plugin://altcha/assets/altcha.min.js') %}
+    <script type="module" async defer src="{{ script_url|e }}"></script>
+
+    <altcha-widget
+        name="altcha"
+        challenge="{{ altcha.challenge_url|e }}"
+        {% if opts.type %}type="{{ opts.type|e }}"{% endif %}
+        {% if opts.auto %}auto="{{ opts.auto|e }}"{% endif %}
+        {% if opts.language %}language="{{ opts.language|e }}"{% endif %}
+        {% if opts.theme %}theme="{{ opts.theme|e }}"{% endif %}
+        {% if widget_config is not empty %}configuration="{{ widget_config|json_encode|e }}"{% endif %}
+    ></altcha-widget>
+{% endblock %}

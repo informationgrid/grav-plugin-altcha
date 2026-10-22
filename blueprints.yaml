@@ -1,0 +1,103 @@
+name: Altcha
+slug: altcha
+type: plugin
+version: 1.0.0
+description: Self-hosted ALTCHA proof-of-work spam protection for Grav forms.
+icon: shield
+author:
+  name: wemove digital solutions GmbH
+homepage: https://altcha.org/docs/
+keywords: altcha, captcha, proof-of-work, spam, form
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.7.0' }
+  - { name: form, version: '>=7.0.0' }
+
+form:
+  validation: loose
+  fields:
+    enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 1
+      options: { 1: PLUGIN_ADMIN.ENABLED, 0: PLUGIN_ADMIN.DISABLED }
+      validate: { type: bool }
+
+    hmac_secret:
+      type: password
+      label: HMAC secret
+      help: Leave empty to auto-generate one (stored in user/data/altcha/secret.key).
+
+    challenge_route:
+      type: text
+      label: Challenge route
+      default: /altcha/challenge
+
+    cost:
+      type: number
+      label: PBKDF2 iterations (cost)
+      default: 1000
+      validate: { type: int, min: 1 }
+
+    counter_min:
+      type: number
+      label: Counter minimum
+      default: 1500
+      validate: { type: int, min: 1 }
+
+    counter_max:
+      type: number
+      label: Counter maximum
+      default: 3000
+      validate: { type: int, min: 1 }
+
+    expires:
+      type: number
+      label: Challenge lifetime (seconds)
+      default: 600
+      validate: { type: int, min: 30 }
+
+    replay_protection:
+      type: toggle
+      label: Replay protection
+      default: 1
+      options: { 1: PLUGIN_ADMIN.ENABLED, 0: PLUGIN_ADMIN.DISABLED }
+      validate: { type: bool }
+
+    script_url:
+      type: text
+      label: Widget script URL override
+      help: Leave empty to use the self-hosted bundle shipped with this plugin.
+
+    widget.type:
+      type: select
+      label: Widget type
+      default: checkbox
+      options: { checkbox: Checkbox, switch: Switch, native: Native }
+
+    widget.auto:
+      type: select
+      label: Auto-verify
+      default: ''
+      options: { '': 'Off (user clicks)', onfocus: On focus, onload: On load, onsubmit: On submit }
+
+    widget.language:
+      type: text
+      label: Language
+      help: ISO code (e.g. de). Empty = detect from <html lang> / browser.
+
+    widget.hide_logo:
+      type: toggle
+      label: Hide ALTCHA logo
+      default: 1
+      options: { 1: PLUGIN_ADMIN.YES, 0: PLUGIN_ADMIN.NO }
+      validate: { type: bool }
+
+    widget.hide_footer:
+      type: toggle
+      label: Hide ALTCHA footer
+      default: 1
+      options: { 1: PLUGIN_ADMIN.YES, 0: PLUGIN_ADMIN.NO }
+      validate: { type: bool }

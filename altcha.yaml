@@ -1,0 +1,32 @@
+enabled: true
+
+# HMAC secret used to sign challenges. Empty = generated once and stored in
+# user/data/altcha/secret.key.
+hmac_secret: ''
+
+# URL the widget fetches challenges from (served by this plugin)
+challenge_route: /altcha/challenge
+
+# Proof-of-work difficulty (PBKDF2/SHA-256). The browser tries counters from 0 up to a
+# random value between counter_min and counter_max, with `cost` iterations each.
+# Roughly: average work = cost × (counter_min + counter_max) / 2.
+cost: 1000
+counter_min: 1500
+counter_max: 3000
+
+# Challenge lifetime in seconds
+expires: 600
+
+# Reject a solved challenge submitted a second time
+replay_protection: true
+
+# Widget script. If empty, use the bundled one in user/plugins/altcha/assets/altcha.min.js
+script_url: ''
+
+# Widget defaults (each form field can override them under `widget:`)
+widget:
+  type: checkbox       # checkbox | switch | native
+  auto: ''             # '' | onfocus | onload | onsubmit
+  language: ''         # '' = auto from <html lang> / browser
+  hide_logo: false
+  hide_footer: false

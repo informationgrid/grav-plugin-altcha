@@ -1,0 +1,6 @@
+en:
+  PLUGIN_ALTCHA:
+    ERROR_MESSAGE: 'Bot protection check failed. Please confirm you are human and try again.'
+de:
+  PLUGIN_ALTCHA:
+    ERROR_MESSAGE: 'Die Spam-Schutz-Prüfung ist fehlgeschlagen. Bitte bestätigen Sie, dass Sie ein Mensch sind, und versuchen Sie es erneut.'
