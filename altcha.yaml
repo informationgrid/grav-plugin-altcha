@@ -28,5 +28,5 @@ widget:
   type: checkbox       # checkbox | switch | native
   auto: ''             # '' | onfocus | onload | onsubmit
   language: ''         # '' = auto from <html lang> / browser
-  hide_logo: false
-  hide_footer: false
+  hide_logo: true
+  hide_footer: true
